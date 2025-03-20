@@ -9,6 +9,7 @@ export default async function HomePage() {
     const cartoonCategory = await getCartoonCategory();
     // console.log("bookCategory : ", bookCategory)
     // console.log("cartoonCategory : ", cartoonCategory)
+
     return (
         <>
             <TitleContent title="Homepage" bookCategory={bookCategory} cartoonCategory={cartoonCategory}/>

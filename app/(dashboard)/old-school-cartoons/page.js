@@ -2,7 +2,7 @@
 import OldSchoolCartoonCard from "@/components/old-school-cartoon/old-school-cartoon-card";
 import TitleContent from "@/components/title-content";
 import { getBookCategory } from "@/service/book-service";
-import { getAllOldSchoolCartoon, getCartoonCategory, SearchCartoonByTitle } from "@/service/cartoon-service";
+import { getAllOldSchoolCartoon, getCartoonByGenreId, getCartoonCategory, SearchCartoonByTitle } from "@/service/cartoon-service";
 
 
 
@@ -10,10 +10,17 @@ export default async function OldSchoolCartoonPage({searchParams}) {
     
     const bookCategory = await getBookCategory();
     const cartoonCategory = await getCartoonCategory();
-    const searchValue = (await searchParams).search;
-    console.log(searchValue)
-    const cartoons = searchValue ? await SearchCartoonByTitle(searchValue) : await getAllOldSchoolCartoon()
-
+    const searchValue = searchParams?.search;
+    const genreValue = searchParams?.genre; 
+   
+    let cartoons;
+    if (searchValue) {
+        cartoons = await SearchCartoonByTitle(searchValue);
+    } else if (genreValue) {
+        cartoons = await getCartoonByGenreId(genreValue); 
+    } else {
+        cartoons = await getAllOldSchoolCartoon();
+    }
     return (
         <>
             <TitleContent title="Old school cartoon" bookCategory={bookCategory} cartoonCategory={cartoonCategory}/>

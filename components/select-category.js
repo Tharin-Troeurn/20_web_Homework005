@@ -1,26 +1,39 @@
 
 "use client"
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function SelectCategory({ bookCategory, cartoonCategory }) {
     const pathname = usePathname()
-    // console.log("bookCategoryjjj : ", bookCategory)
-    // console.log("cartoonCategorykk : ", cartoonCategory)
+    // console.log("bookCategory: ", bookCategory)
+    // console.log("cartoonCategory : ", cartoonCategory)
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    
+    const handleCategoryChange = (categoryId) => {
+        const params = new URLSearchParams(searchParams.toString());
+        // console.log("params  : ", params)
+        // params.set("genre", categoryId); // Update category in URL
+        // router.push(`${pathname}?${params.toString()}`); 
+        
+    if (pathname === "/book-categories/search") {
+        params.set("query", categoryId);
+        router.push(`${pathname}?${params.toString()}`);
+    } else {
+        
+        params.set("genre", categoryId);
+        router.push(`${pathname}?${params.toString()}`);
+    }
+    };
     return (
         <>
             <div className={`${pathname === "/" ? "hidden" : "flex"}`}>
-                <div className={`group relative cursor-pointer py-1
-                    
-                    `}>
-                    <div className="flex items-center justify-between space-x-5 bg-[#F5F7F8] px-4 rounded-xl">
-                        <Link
-                            href={"/"}
-                            className="menu-hover my-2 py-1 text-base font-medium text-[#B9B9B9] lg:mx-4"
-
-                        >
+                <div className={`group relative cursor-pointer `}>
+                    <div className="flex items-center justify-between space-x-5 bg-[#F5F7F8] px-2 rounded-xl">
+                        <div
+                            className="menu-hover my-2 text-base font-medium text-[#B9B9B9] lg:mx-4">
                             Select a category
-                        </Link>
+                        </div>
                         <span>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -42,15 +55,24 @@ export default function SelectCategory({ bookCategory, cartoonCategory }) {
                         {
                             pathname === "/book-categories" ?
                                 bookCategory.payload.map((item) => (
-                                    <Link key={item.id} href={"/"} className="my-1 text-sm block border-b border-gray-100  text-gray-500 hover:text-black">
-                                        {item.book_cate_name}
-                                    </Link>
+                                    <div 
+                                        key={item.id} 
+                                        className=" block border-b border-gray-100  text-gray-500 hover:text-black"
+                                        onClick={() => handleCategoryChange(item.id)}
+                                    >
+                                        <p className="text-[12px] py-1">{item.book_cate_name}</p>
+                                    </div>
                                 ))
                                 :
                                 cartoonCategory.payload.map((item) => (
-                                    <Link key={item.id} href={"/"} className="my-1 text-sm block border-b border-gray-100  text-gray-500 hover:text-black">
-                                        {item.cartoon_genre}
-                                    </Link>
+                                    <div 
+                                        key={item.id} 
+                                        className=" text-sm block border-b border-gray-100  text-gray-500 hover:text-black"
+                                        onClick={() => handleCategoryChange(item.id)}
+                                    >
+                                        
+                                        <p className="text-[12px] py-1">{item.cartoon_genre}</p>
+                                    </div>
                                 ))
                         }
                     </div>

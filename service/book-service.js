@@ -23,3 +23,10 @@ export const SearchBookByTitle = async(searchValue) =>{
 
     return searchBookTitle;
 }
+
+export const getBookByCategoryId = async(queryId)=>{
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/book_category/search?query=${queryId}`)
+    const booksByCategoryId = await res.json();
+
+    return booksByCategoryId;
+} 

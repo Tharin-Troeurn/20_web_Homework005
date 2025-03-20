@@ -23,3 +23,10 @@ export const SearchCartoonByTitle = async(searchValue) =>{
 
     return searchCartoonByTitle;
 }
+
+export const getCartoonByGenreId = async(genreId)=>{
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/cartoon?genre=${genreId}`)
+    const cartoonByGenreId = await res.json();
+
+    return cartoonByGenreId;
+} 
