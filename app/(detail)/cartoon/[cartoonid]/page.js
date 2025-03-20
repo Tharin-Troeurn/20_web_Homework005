@@ -1,5 +1,6 @@
 import BookDetailCard from "@/components/book-detail-card";
-import { getCartoonById } from "@/service/get-cartoon-by-id";
+import { getCartoonById } from "@/service/cartoon-service";
+
 
 export default async function BookReadFullArticle( { params }) {
     const { cartoonid } = params; 

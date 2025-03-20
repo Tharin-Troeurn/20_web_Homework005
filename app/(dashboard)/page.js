@@ -1,6 +1,7 @@
 import TitleContent from "@/components/title-content";
-import { getBookCategory } from "@/service/get-book-category";
-import { getCartoonCategory } from "@/service/get-cartoon-category";
+import { getBookCategory } from "@/service/book-service";
+import { getCartoonCategory } from "@/service/cartoon-service";
+
 import Link from "next/link";
 
 export default async function HomePage() {

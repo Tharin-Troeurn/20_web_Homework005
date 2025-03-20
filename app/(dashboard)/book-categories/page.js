@@ -1,9 +1,8 @@
 import BookCard from "@/components/book-category/book-card";
 import TitleContent from "@/components/title-content";
-import { getAllBooks } from "@/service/all-book-service";
-import { getBookCategory } from "@/service/get-book-category";
-import { getCartoonCategory } from "@/service/get-cartoon-category";
-import { SearchBookByTitle } from "@/service/search-book-by-id";
+import { getAllBooks, getBookCategory, SearchBookByTitle } from "@/service/book-service";
+import { getCartoonCategory } from "@/service/cartoon-service";
+
 
 export default async function BookCategoryPage({searchParams}) {
     
@@ -12,7 +11,6 @@ export default async function BookCategoryPage({searchParams}) {
     const searchValue = (await searchParams).search
     // console.log("search : ", searchValue)
     const books = searchValue  ? await SearchBookByTitle(searchValue) : await getAllBooks(); 
-    
     
     return (
         <>

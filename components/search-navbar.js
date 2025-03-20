@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation"
 
 export default function SearchNavbar(){
     const pathname = usePathname();
-    console.log("pathname : ", pathname)
+    // console.log("pathname : ", pathname)
 
     return (
         <>

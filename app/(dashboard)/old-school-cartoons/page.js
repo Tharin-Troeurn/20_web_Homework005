@@ -1,10 +1,9 @@
 
 import OldSchoolCartoonCard from "@/components/old-school-cartoon/old-school-cartoon-card";
 import TitleContent from "@/components/title-content";
-import { getAllOldSchoolCartoon } from "@/service/all-old-school-cartoon";
-import { getBookCategory } from "@/service/get-book-category";
-import { getCartoonCategory } from "@/service/get-cartoon-category";
-import { SearchCartoonByTitle } from "@/service/search-cartoon-by-title";
+import { getBookCategory } from "@/service/book-service";
+import { getAllOldSchoolCartoon, getCartoonCategory, SearchCartoonByTitle } from "@/service/cartoon-service";
+
 
 
 export default async function OldSchoolCartoonPage({searchParams}) {
